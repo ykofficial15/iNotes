@@ -88,7 +88,7 @@ class _CreateNoteState extends State<CreateNote> {
           child: Column(
             children: [
                Container(
-                width: MediaQuery.of(context).size.width,
+                   width: MediaQuery.of(context).size.width,
                 height: 70,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -97,9 +97,7 @@ class _CreateNoteState extends State<CreateNote> {
                     bottomRight: Radius.circular(18),
                   ),
                 ),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -130,7 +128,6 @@ class _CreateNoteState extends State<CreateNote> {
                       ),
                     ],
                   ),
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
