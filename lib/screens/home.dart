@@ -39,153 +39,158 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        physics: ScrollPhysics(),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 0, 23, 91),
-          ),
-          child: Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(18),
-                    bottomRight: Radius.circular(18),
-                  ),
-                ),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'iNotes',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 23, 91),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => About(),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.info,
-                          size: 30,
-                          color: Color.fromARGB(255, 0, 23, 91),
-                        ),
-                      ),
-                    ],
-                  ),
+    return SingleChildScrollView(
+         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+           physics: ScrollPhysics(),
+      child: Container(
+         color: Color.fromARGB(255, 0, 23, 91),
+        child: Column(
+          children: [
+             Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            height: 70,
+                   decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(18),
+                  bottomRight: Radius.circular(18),
                 ),
               ),
-              Expanded(
-                child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.all(8),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: savedNotes.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'iNotes',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 23, 91),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NoteDetails(note: savedNotes[index]),
+                            builder: (context) => About(),
                           ),
                         );
                       },
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Note ${index + 1}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                  PopupMenuButton<String>(
-                                    tooltip: 'Changes',
-                                    onSelected: (value) {
-                                      if (value == 'edit') {
-                                        editNoteButtonPressed(index);
-                                      } else if (value == 'delete') {
-                                        deleteNoteButtonPressed(index);
-                                      }
-                                    },
-                                    itemBuilder: (BuildContext context) => [
-                                      PopupMenuItem<String>(
-                                        value: 'edit',
-                                        child: Text('Edit'),
-                                      ),
-                                      PopupMenuItem<String>(
-                                        value: 'delete',
-                                        child: Text('Delete'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(thickness: 1),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              savedNotes[index].title,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 0, 23, 91),
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              savedNotes[index].content,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 5,
-                              style: TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                      icon: Icon(
+                        Icons.info,
+                        size: 30,
+                        color: Color.fromARGB(255, 0, 23, 91),
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+         
+              Container(
+             height: MediaQuery.sizeOf(context).height,
+             width: MediaQuery.sizeOf(context).width,
+             padding: EdgeInsets.fromLTRB(0, 0, 0, 160),
+             margin: EdgeInsets.all(5),
+             child: GridView.builder(
+                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                     crossAxisCount: 2,
+                     crossAxisSpacing: 10,
+                     mainAxisSpacing: 10,
+                   ),
+                   itemCount: savedNotes.length,
+                   itemBuilder: (context, index) {
+                     return Container(
+                       
+                       decoration: BoxDecoration(
+                           color:Colors.white,
+                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                         ),
+                       child: InkWell(
+                         onTap: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => NoteDetails(note: savedNotes[index]),
+                             ),
+                           );
+                         },
+                         child: Column(
+                           children: [
+                             Container(
+                               margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                               child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: [
+                                           Text(
+                                             'Note ${index + 1}',
+                                             style: TextStyle(
+                                               fontWeight: FontWeight.bold,
+                                             ),
+                                           ),
+                                           PopupMenuButton<String>(
+                                             tooltip: 'Changes',
+                                             onSelected: (value) {
+                                               if (value == 'edit') {
+                                                 editNoteButtonPressed(index);
+                                               } else if (value == 'delete') {
+                                                 deleteNoteButtonPressed(index);
+                                               }
+                                             },
+                                             itemBuilder: (BuildContext context) => [
+                                               PopupMenuItem<String>(
+                                                 value: 'edit',
+                                                 child: Text('Edit'),
+                                               ),
+                                               PopupMenuItem<String>(
+                                                 value: 'delete',
+                                                 child: Text('Delete'),
+                                               ),
+                                             ],
+                                           ),
+                                 ],
+                               ),
+                             ),
+                            
+                             Container(
+                               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                               child: Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Divider(thickness: 1),
+                                   
+                                   Text(
+                                     savedNotes[index].title,
+                                     overflow: TextOverflow.ellipsis,
+                                     maxLines: 1,
+                                     style: TextStyle(
+                                               fontSize: 16,
+                                               color: Color.fromARGB(255, 0, 23, 91),
+                                     ),
+                                   ),
+                                   SizedBox(height: 8),
+                                   Text(
+                                     savedNotes[index].content,
+                                     maxLines: 5,
+                                     overflow: TextOverflow.fade,
+                                     style: TextStyle(fontSize: 12),
+                                     textAlign: TextAlign.center,
+                                   ),
+                                 ],
+                               ),
+                             ),
+             
+                           ],
+                         ),
+                       ),
+                     );
+                   },
+                 ),
+              ),
+        
+            
+             
+          ],
         ),
       ),
     );
@@ -241,10 +246,10 @@ class _HomeState extends State<Home> {
               TextField(
                 cursorColor: Color.fromARGB(255, 0, 23, 91),
                 controller: contentController,
-                maxLines: 10,
+                maxLines: 8,
                 decoration: InputDecoration(
-                  labelText: 'Today\'s title',
-                  hintText: 'Title',
+                  labelText: 'Describe Your Thoughts',
+                  hintText: 'Thoughts',
                   labelStyle: TextStyle(
                     color: Color.fromARGB(255, 0, 23, 91),
                   ),
